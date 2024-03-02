@@ -1,35 +1,36 @@
 <template>
-  <div class="w-[80%] flex items-center justify-center gap-2 py-2 flex-col ">
-    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold" v-model="refills" placeholder="Number of water refills"/>
+  <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 rounded-lg">
+    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold" v-model="refills" placeholder="Please indicate the number of bottles you refilled"/>
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
-      <button class="bg-stone-500 p-2 rounded-lg font-bold w-[80%] md:w-[80%] hover:bg-stone-700  hover:transition-all hover:duration-700" @click="calculateSavings">Calculate</button>
+      <button class="btn-calculate p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-white " @click="calculateSavings"> Calculate</button>
     </div>
     <div class="flex gap-4 flex-col w-[80%]">
-      <div class=" p-4   bg-green-300 border-4 border-white rounded-lg flex flex-col justify-center items-center font-bold">
-        <div class="flex items-center w-[100%] justify-center gap-2">
+      <div class=" p-4  bg-green-300 border-4 border-white rounded-lg flex flex-col justify-center items-center font-bold">
+        <h3 class="underline">Results</h3>
+        <div class="flex items-center w-[100%] justify-center gap-2 ">
           <p>Bottles</p>
           <i class="fa-solid fa-arrow-right"></i>
           <p>{{ parseFloat(bottlesSaved) }}</p>
         </div>
-        <div class="flex items-center w-[100%] justify-center gap-2">
+        <div class="flex items-center w-[100%] justify-center gap-2 ">
           <p>Kg Plastic</p>
           <i class="fa-solid fa-arrow-right"></i><p>{{ parseFloat(plasticsSaved) }}</p>
         </div>
         <div class="flex items-center w-[100%] justify-center gap-2">
           <p>Kg Carbon</p>
-          <i class="fa-solid fa-arrow-right"></i><p>{{ parseFloat(carbonSaved) }}</p>
+          <i class="fa-solid fa-arrow-right animate-fade animate-infinite animate-duration-1000 animate-delay-0 animate-ease-in animate-normal animate-fill-forwards "></i><p>{{ parseFloat(carbonSaved) }}</p>
         </div>
       </div>
       
     </div>
     <div class="flex items-center justify-center gap-4 flex-col w-full">
       <!-- Botón para generar el enlace -->
-      <button class="bg-lime-600 p-2 rounded-lg font-bold shadow-black shadow-2xl hover:cursor-pointer w-[79%] hover:bg-lime-700  hover:transition-all hover:duration-700 md:w-[80%]" v-if="!linkGenerated" @click="generateLink">
+      <button class="btn-generate p-2 rounded-lg font-bold shadow-black shadow-2xl hover:cursor-pointer w-[79%] hover:bg-lime-700  hover:transition-all hover:duration-700 md:w-[80%] text-white" v-if="!linkGenerated" @click="generateLink">
         Generate Link
       </button>
       
       <!-- Botón para copiar el enlace -->
-      <button class="bg-yellow-600 p-2 w-[80%] rounded-lg font-bold" v-else @click="copyLink">
+      <button class="btn-copy p-2 w-[80%] rounded-lg font-bold text-white" v-else @click="copyLink">
         Copy Link
       </button>
       <div v-if="linkGenerated"
@@ -38,7 +39,7 @@
         <input class="p-2 rounded-lg w-[79%] text-black text-center" ref="enlaceInput" type="text" v-model="link"
           readonly>
       </div>
-      <button class="bg-lime-600 w-[79%] p-2 rounded-lg font-bold  md:w-[80%] hover:bg-lime-700  hover:transition-all hover:duration-700" @click="saveResults">Save</button>
+      <button class="btn-save w-[79%] p-2 rounded-lg font-bold  md:w-[80%]   hover:transition-all hover:duration-700 text-white" @click="saveResults">Save</button>
       <!-- División para mostrar el enlace generado -->
     </div>
 

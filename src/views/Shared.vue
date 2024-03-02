@@ -1,7 +1,6 @@
 
 <template>
-    <div class="box-color h-screen">
-    
+    <div class="box-color ">
         <SharedLink />
     </div>
 </template>

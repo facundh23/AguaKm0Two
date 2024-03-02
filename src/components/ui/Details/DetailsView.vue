@@ -1,6 +1,7 @@
 <template>
     <div class="flex flex-col items-center justify-center ">
 
+    
         <ul class="flex items-center flex-col justify-center w-[100%] ">
             <li class="mt-2 border-4 p-2 w-[70%] md:w-[50%]" v-for="doc in documents" :key="doc.id">
                 <div class="flex flex-col text-center justify-center mx-auto ">

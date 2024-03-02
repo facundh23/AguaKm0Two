@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen flex items-center box-color">
+    <div class="flex items-center box-color">
         <DashBoardComponent />
     </div>
 </template>

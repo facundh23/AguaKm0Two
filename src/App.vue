@@ -2,14 +2,11 @@
 </script>
 
 <template>
-    <div>
-        <nav class="text-black p-2 bg-green-500 w-full flex justify-around">
+        <nav class="text-white p-2 navbar w-[90%]  flex justify-around mx-auto rounded-lg mt-2">
             <router-link class="font-bold" to="/">Dashboard</router-link>
             <router-link class="font-bold"  to="/details">Details</router-link>
-            
         </nav>
-        <router-view />
-    </div>
+        <router-view /> 
 </template>
 
 <style scoped></style>
