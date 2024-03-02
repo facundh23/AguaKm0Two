@@ -126,7 +126,7 @@ export default {
     },
     generateLink() {
       if (this.resultCalculated) {
-        const baseUrl = 'https://test-agua-km0-nxcfns8tf-facundo-herreras-projects.vercel.app/shared'; // Cambia esto por tu URL de producción
+        const baseUrl = 'https://test-agua-km0-eme1im3o7-facundo-herreras-projects.vercel.app/shared'; // Cambia esto por tu URL de producción
         const queryParams = new URLSearchParams({
           bottlesSaved: this.bottlesSaved,
           plasticsSaved: this.plasticsSaved,
