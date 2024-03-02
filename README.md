@@ -40,9 +40,9 @@ Ensure you have Node.js installed on your system. You can download and install i
 ## If you are working with an existing repository, clone it to your local machine:
 
 bash
-   ```
-   git clone <REPOSITORY_URL>
-   ```
+      ```
+      git clone <REPOSITORY_URL>
+      ```
 
 ## Then, follow steps 2 to 4.
 
