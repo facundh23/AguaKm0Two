@@ -1,0 +1,188 @@
+<template>
+  <div class="w-[80%] flex items-center justify-center gap-2 py-2 flex-col ">
+    <input class="w-full h-10 rounded-lg md:w-[90%] text-center font-bold" v-model="refills" />
+    <div class="flex items-center justify-around w-full flex-col gap-2 md:flex-row">
+      <button class="bg-blue-600 p-2 rounded-lg font-bold w-full md:w-[40%]" @click="calculateSavings">Calculate</button>
+      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full md:w-[40%]" @click="saveResults">Save</button>
+    </div>
+
+    <div class="flex gap-4 flex-col w-[100%]">
+      <div class=" p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+        <p>Bottles 33ml</p>
+        <p>{{ parseFloat(bottlesSaved) }}</p>
+      </div>
+      <div class="iCountUp p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+        <p>Kg Plastic</p>
+        <p>{{ parseFloat(plasticsSaved) }}</p>
+      </div>
+      <div class=" p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+        <p>Kg Carbon</p>
+        <p>{{ parseFloat(carbonSaved) }}</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-center gap-4 flex-col w-full">
+      <!-- Botón para generar el enlace -->
+      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full" v-if="!linkGenerated" @click="generateLink">
+        Generate Link
+      </button>
+
+      <!-- Botón para copiar el enlace -->
+      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full" v-else @click="copyLink">
+        Copy Link
+      </button>
+
+      <!-- División para mostrar el enlace generado -->
+      <div v-if="linkGenerated"
+        class="bg-lime-600 p-2 rounded-lg font-bold w-full flex flex-col items-center justify-around gap-2">
+        <label class="text-2xl">Impact link:</label>
+        <input class="p-2 rounded-lg w-[100%] text-black text-center" ref="enlaceInput" type="text" v-model="link"
+          readonly>
+      </div>
+    </div>
+
+  </div>
+</template>
+  
+<script>
+
+
+import { db, collection, addDoc } from '../../../services/firebase';
+
+export default {
+
+  name: 'InputValue',
+
+  data() {
+    return {
+      reloads: 0,
+      resultCalculated: false,
+      bottlesSaved: 0,
+      plasticsSaved: 0,
+      carbonSaved: 0,
+      linkGenerated: false,
+      link: ''
+    };
+  },
+
+
+
+  methods: {
+    calculateSavings() {
+
+      // Assuming 2 bottles per refill
+      const refills = parseFloat(this.refills);
+      if (!isNaN(refills)) {
+
+        this.bottlesSaved = this.refills * 2;
+
+        // Approximating 0.012 kg of plastic per bottle
+        this.plasticsSaved = (this.bottlesSaved * 0.012).toFixed(2);
+
+        // Approximation of 0.08 kg of CO2 per bottle
+        this.carbonSaved = (this.bottlesSaved * 0.08).toFixed(2);
+      } else {
+        this.$swal({
+          title: 'Error!',
+          text: 'Error, complete the fields',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        })
+      }
+
+      this.resultCalculated = true;
+
+    },
+    saveResults() {
+      if (this.resultCalculated) {
+        addDoc(collection(db, "savings"), {
+          bottlesSaved: this.bottlesSaved,
+          plasticsSaved: parseFloat(this.plasticsSaved),
+          carbonSaved: parseFloat(this.carbonSaved),
+        })
+          .then(docRef => {
+            this.refills = 0;
+            this.$swal({
+              title: 'OK!',
+              text: `Results saved in Firebase with ID:, ${docRef.id}`,
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+          })
+          .catch(error => {
+            this.$swal({
+              title: 'Error!',
+              text: `Error saving results to Firebase:, ${error}`,
+              icon: 'error',
+              confirmButtonText: 'Close'
+            })
+
+          });
+      } else {
+        this.$swal({
+          title: 'Error!',
+          text: 'Error, complete the fields',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        })
+      }
+
+    },
+    generateLink() {
+      if (this.resultCalculated) {
+        const baseUrl = 'http://localhost:5173/shared'; // Cambia esto por tu URL de producción
+        const queryParams = new URLSearchParams({
+          bottlesSaved: this.bottlesSaved,
+          plasticsSaved: this.plasticsSaved,
+          carbonSaved: this.carbonSaved
+        });
+        this.link = `${baseUrl}?${queryParams.toString()}`;
+        this.linkGenerated = true;
+
+        // Navegar a la página de detalles
+        this.$router.push({name:SharedLink, query:queryParams})
+      } else {
+        this.$swal({
+          title: 'Error!',
+          text: 'Error, complete the fields',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        })
+      }
+    },
+
+    copyLink() {
+      if (this.linkGenerated) {
+        const input = document.createElement('input');
+        input.setAttribute('value', this.link);
+        document.body.appendChild(input);
+        input.select();
+        navigator.clipboard.writeText(this.link)
+          .then(() => {
+            this.$swal({
+              title: 'OK!',
+              text: 'Link copied to clipboard.',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+
+          })
+          .catch(err => {
+            // Manejar el error
+            console.error('Error copying link: ', err);
+          });
+        document.body.removeChild(input);
+      } else {
+        this.$swal({
+          title: 'Error!',
+          text: 'Error, complete the fields.',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        })
+      }
+    }
+
+  }
+};
+
+
+</script>
