@@ -1,8 +1,6 @@
 
 <template>
-    <div class="flex items-center box-color">
         <DashBoardComponent />
-    </div>
 </template>
 
 <script>
