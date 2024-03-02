@@ -1,36 +1,33 @@
 <template>
   <div class="w-[80%] flex items-center justify-center gap-2 py-2 flex-col ">
-    <input class="w-full h-10 rounded-lg md:w-[90%] text-center font-bold" v-model="refills" />
+    <input class="w-full h-10 rounded-lg md:w-[100%] text-center font-bold" v-model="refills" />
     <div class="flex items-center justify-around w-full flex-col gap-2 md:flex-row">
-      <button class="bg-blue-600 p-2 rounded-lg font-bold w-full md:w-[40%]" @click="calculateSavings">Calculate</button>
-      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full md:w-[40%]" @click="saveResults">Save</button>
+      <button class="bg-blue-600 p-4 rounded-lg font-bold w-full md:w-[30%] hover:bg-blue-700 hover:transition-all hover:duration-700" @click="calculateSavings">Calculate</button>
+      <button class="bg-lime-600 p-4 rounded-lg font-bold w-full md:w-[30%] hover:bg-lime-700 hover:transition-all hover:duration-700" @click="saveResults">Save</button>
     </div>
-
     <div class="flex gap-4 flex-col w-[100%]">
-      <div class=" p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+      <div class=" p-4 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
         <p>Bottles 33ml</p>
         <p>{{ parseFloat(bottlesSaved) }}</p>
       </div>
-      <div class="iCountUp p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+      <div class="p-4 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
         <p>Kg Plastic</p>
         <p>{{ parseFloat(plasticsSaved) }}</p>
       </div>
-      <div class=" p-2 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
+      <div class="p-4 border-black border-2 bg-green-400 rounded-lg flex justify-around font-bold">
         <p>Kg Carbon</p>
         <p>{{ parseFloat(carbonSaved) }}</p>
       </div>
     </div>
     <div class="flex items-center justify-center gap-4 flex-col w-full">
       <!-- Botón para generar el enlace -->
-      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full" v-if="!linkGenerated" @click="generateLink">
+      <button class="bg-lime-600 p-2 rounded-lg font-bold w-full hover:cursor-pointer hover:bg-lime-700 hover:transition-all hover:duration-700" v-if="!linkGenerated" @click="generateLink">
         Generate Link
       </button>
-
       <!-- Botón para copiar el enlace -->
       <button class="bg-lime-600 p-2 rounded-lg font-bold w-full" v-else @click="copyLink">
         Copy Link
       </button>
-
       <!-- División para mostrar el enlace generado -->
       <div v-if="linkGenerated"
         class="bg-lime-600 p-2 rounded-lg font-bold w-full flex flex-col items-center justify-around gap-2">
@@ -186,3 +183,11 @@ export default {
 
 
 </script>
+
+<style>
+
+  .btn-generator:hover{
+    cursor: pointer;
+  }
+
+</style>

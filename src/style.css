@@ -13,3 +13,10 @@ body {
 .box-color {
     background-color: #00263A
 }
+
+.generateBtn:hover{
+    background-color: green;
+    transition: all;
+    transition-duration: 309ms;
+    cursor: pointer;
+}

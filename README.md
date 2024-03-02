@@ -1,7 +1,30 @@
-# Vue 3 + Vite
+# Nombre del Proyecto
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Proyecto de en donde se desarrolla una aplicación que permite a los usuarios introducir un número de recargas de agua y calcula el impacto medioambiental en términos de botellas de plástico ahorradas, kilogramos de plástico ahorrados y kilogramos de dióxido de carbono ahorrados. 
 
-## Recommended IDE Setup
+## Requisitos Previos
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Asegúrate de tener instalado Node.js en tu sistema. Puedes descargarlo e instalarlo desde [la página oficial de Node.js](https://nodejs.org/).
+
+## Configuración del Proyecto
+
+1. Clona este repositorio en tu máquina local:
+
+```bash
+git clone <URL_DEL_REPOSITORIO> 
+```
+
+## Accede al directorio del proyecto
+```
+ cd nombre-del-proyecto
+``` 
+
+## Instala las dependencias del proyecto utilizando npm
+```
+npm install
+``` 
+## Inicia el Proyecto
+```
+npm run dev
+``` 
+
