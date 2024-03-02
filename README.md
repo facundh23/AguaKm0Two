@@ -1,25 +1,26 @@
 # Test Agua KM 0
 
-Proyecto de en donde se desarrolla una aplicación que permite a los usuarios introducir un número de recargas de agua y calcula el impacto medioambiental en términos de botellas de plástico ahorradas, kilogramos de plástico ahorrados y kilogramos de dióxido de carbono ahorrados. 
+This project develops an application that allows users to input a number of water refills and calculates the environmental impact in terms of plastic bottles saved, kilograms of plastic saved, and kilograms of carbon dioxide saved.
 
-## Requisitos Previos
+## Prerequisites
 
-Asegúrate de tener instalado Node.js en tu sistema. Puedes descargarlo e instalarlo desde [la página oficial de Node.js](https://nodejs.org/).
+Ensure you have Node.js installed on your system. You can download and install it from [the official Node.js website](https://nodejs.org/).
 
-## Configuración del Proyecto
+## Project Setup
 
-1. Clona este repositorio en tu máquina local:
+1. **Create a New Vue Application Using Vite**:
+   If you are starting from scratch and need to create a new Vue application, you can use Vite. Run the following command in your terminal:
 
-```bash
-git clone <URL_DEL_REPOSITORIO> 
+   ```bash
+   npm create vite@latest
+   ```
+
+## Access the project directory:
 ```
-
-## Accede al directorio del proyecto
-```
- cd nombre-del-proyecto
+ cd project-name
 ``` 
 
-## Instala las dependencias del proyecto utilizando npm
+## Install the project dependencies using npm:
 ```
 npm install
 ``` 
@@ -27,6 +28,15 @@ npm install
 ```
 npm run dev
 ```
+
+## If you are working with an existing repository, clone it to your local machine:
+
+bash
+```
+git clone <REPOSITORY_URL>
+```
+
+## Then, follow steps 2 to 4.
 
 Proyecto: [Project Agua KM0](https://test-agua-km0.vercel.app/). 
 
