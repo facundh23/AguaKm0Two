@@ -1,7 +1,7 @@
 <template>
-    <div class="w-[100%] md:w-[90%] flex flex-col items-center justify-start md:mt-10 md:h-screen p-2 mx-auto gap-2 ">
-        <h1 class="font-bold text-white mb-3 text-3xl italic text-center">Refill Impact Dashboard</h1>
-        <p class="text-white font-bold text-center mb-2 w-[80%]">This application that allows users to input a number of water refills and calculates the environmental impact in terms of plastic bottles saved, kilograms of plastic saved, and kilograms of carbon dioxide saved</p>
+    <div class="w-[100%]  md:w-[90%] flex flex-col items-center justify-start md:mt-10  p-2 mx-auto gap-2 ">
+        <h1 class="font-bold text-[#26D07C] mb-2 text-3xl italic text-center">Refill Impact Dashboard</h1>
+        <p class="text-[#26D07C] font-bold text-center  w-[80%]">This application that allows users to input a number of water refills and calculates the environmental impact</p>
         <FormValue />
     </div>
 </template>

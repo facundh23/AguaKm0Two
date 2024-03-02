@@ -1,15 +1,13 @@
 <template>
-    <div class="flex flex-col items-center justify-center ">
-
-    
+    <div class="flex flex-col items-center justify-center bg-[#E6FBED] ">
         <ul class="flex items-center flex-col justify-center w-[100%] ">
-            <li class="mt-2 border-4 p-2 w-[70%] md:w-[50%]" v-for="doc in documents" :key="doc.id">
+            <li class="mt-2 border-4 border-[#04263A] p-2 w-[70%] md:w-[50%] bg-[#E6FBED]" v-for="doc in documents" :key="doc.id">
                 <div class="flex flex-col text-center justify-center mx-auto ">
-                   <p class="text-white ">ID: <span class=" text-white font-bold">{{ doc.id }}</span></p>
-                    <p class="text-white">Bottles Saved: <span class="font-bold text-white">{{ doc.bottlesSaved }}</span> </p>
-                    <p class="text-white">Plastic Saved: <span class="font-bold text-white">{{ doc.plasticsSaved
+                   <p class="text-[#04263A] ">ID: <span class=" text-[#04263A] font-bold">{{ doc.id }}</span></p>
+                    <p class="text-[#04263A]">Bottles Saved: <span class="font-bold text-[#04263A]">{{ doc.bottlesSaved }}</span> </p>
+                    <p class="text-[#04263A]">Plastic Saved: <span class="font-bold text-[#04263A]">{{ doc.plasticsSaved
                     }} KG</span> </p>
-                    <p class="text-white">Carbon Saved: <span class="font-bold text-white">{{ doc.carbonSaved }}</span> </p>
+                    <p class="text-[#04263A]">Carbon Saved: <span class="font-bold text-[#04263A]">{{ doc.carbonSaved }}</span> </p>
                 </div>
             </li>
         </ul>

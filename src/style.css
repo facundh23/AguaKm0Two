@@ -4,57 +4,13 @@
 
 
 body {
-    font-family: "Noto Sans", sans-serif;
-    font-optical-sizing: auto;
-    background-color: #00263A;
+    font-family: "Questrial", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #E6FBED;
 }
 
 .navbar {
-    background: rgb(0, 0, 3);
-    background: linear-gradient(90deg, rgba(0, 0, 3, 1) 0%, rgba(55, 54, 129, 0.9641106442577031) 87%);
-}
-
-.box-color {
     background-color: #00263A;
-    height: 100%;
 }
 
-.btn-generate{
-    background: rgb(0, 0, 3);
-    background: linear-gradient(90deg, rgba(0, 0, 3, 1) 0%, rgba(150, 148, 230, 0.842) 87%);
-}
-
-.btn-generate:hover {
-    background: rgb(0, 0, 3);
-    background: linear-gradient(45deg,rgba(150, 148, 230, 0.842) 0%, rgba(0, 0, 3, 1)  90% );
-}
-.btn-save{
-    background: rgb(0, 0, 3);
-    background: linear-gradient(90deg, rgba(0, 0, 3, 1) 0%, rgba(120, 118, 240, 0.842) 87%);
-}
-
-.btn-save:hover {
-    background: rgb(0, 0, 3);
-    background: linear-gradient(45deg,rgba(120, 118, 240, 0.842) 0%, rgba(0, 0, 3, 1)  90% );
-}
-.btn-copy{
-    background: rgb(0, 0, 3);
-    background: linear-gradient(90deg, rgba(0, 0, 3, 1) 0%, rgba(120, 118, 240, 0.842) 87%);
-}
-
-.btn-copy:hover {
-    background: rgb(0, 0, 3);
-    background: linear-gradient(45deg,rgba(120, 118, 240, 0.842) 0%, rgba(0, 0, 3, 1)  90% );
-}
-
-
-.btn-calculate{
-    background: rgb(0, 0, 3);
-    background: linear-gradient(90deg, rgba(0, 0, 3, 1) 0%, rgba(78, 77, 185, 0.964) 87%);
-}
-
-.btn-calculate:hover{
-    background: rgb(0, 0, 3);
-    background: linear-gradient(8deg,rgba(78, 77, 185, 0.964) 0%, rgba(0, 0, 3, 1)  90% );
-} 
-  
