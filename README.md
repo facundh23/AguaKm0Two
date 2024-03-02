@@ -1,4 +1,4 @@
-# Nombre del Proyecto
+# Test Agua KM 0
 
 Proyecto de en donde se desarrolla una aplicación que permite a los usuarios introducir un número de recargas de agua y calcula el impacto medioambiental en términos de botellas de plástico ahorradas, kilogramos de plástico ahorrados y kilogramos de dióxido de carbono ahorrados. 
 
