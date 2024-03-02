@@ -137,16 +137,11 @@ export default {
           plasticsSaved: this.plasticsSaved,
           carbonSaved: this.carbonSaved
         });
-        let fullLink = `${baseUrl}?${queryParams.toString()}`;
-     if (fullLink.length > 25) {
-      this.link = fullLink.substring(0, 25) + '...';
-      } else {
-      this.link = fullLink;
-      }
-     this.linkGenerated = true;
+        this.link = `${baseUrl}?${queryParams.toString()}`;
+        this.linkGenerated = true;
 
-      // Navegar a la página de detalles
-      this.$router.push({name: 'SharedLink', query: queryParams})
+        // Navegar a la página de detalles
+        this.$router.push({name:SharedLink, query:queryParams})
       } else {
         this.$swal({
           title: 'Error!',
