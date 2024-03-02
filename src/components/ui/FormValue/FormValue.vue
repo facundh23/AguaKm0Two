@@ -5,7 +5,7 @@
       <button class="btn-calculate p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-white shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
     <div class="flex gap-4 flex-col w-[80%]">
-      <div class=" p-4  bg-green-300 border-4 border-white rounded-lg flex flex-col justify-center items-center font-bold">
+      <div class=" p-4 bg-indigo-700 border-4 border-white rounded-lg flex flex-col justify-center items-center font-bold text-white">
         <h3 class="underline">Results</h3>
         <div class="flex items-center w-[100%] justify-center gap-2 ">
           <p>Bottles</p>
