@@ -39,7 +39,7 @@
         <input class="p-2 rounded-lg w-[79%] text-black text-center" ref="enlaceInput" type="text" v-model="link"
           readonly>
       </div>
-      <button class="btn-save w-[79%] p-2 rounded-lg font-bold  md:w-[80%] shadow-lg shadow-black text-white" @click="saveResults">Save</button>
+      <button class="btn-save w-[79%] p-2 rounded-lg font-bold  md:w-[80%]  shadow-lg shadow-black text-white" @click="saveResults">Save</button>
       <!-- División para mostrar el enlace generado -->
     </div>
 
