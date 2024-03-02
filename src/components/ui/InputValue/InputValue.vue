@@ -126,7 +126,7 @@ export default {
     },
     generateLink() {
       if (this.resultCalculated) {
-        const baseUrl = `${import.meta.env.VITE_APP_BASE_URL}/shared`; // Cambia esto por tu URL de producción
+        const baseUrl = import.meta.env.VITE_APP_BASE_URL; // Cambia esto por tu URL de producción
         const queryParams = new URLSearchParams({
           bottlesSaved: this.bottlesSaved,
           plasticsSaved: this.plasticsSaved,
