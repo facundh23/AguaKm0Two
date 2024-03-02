@@ -28,5 +28,5 @@ npm install
 npm run dev
 ```
 
-Proyecto: [This link]([http://example.net/](https://test-agua-km0.vercel.app/)https://test-agua-km0.vercel.app/). 
+Proyecto: [This link](https://test-agua-km0.vercel.app/). 
 
