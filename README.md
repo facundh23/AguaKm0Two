@@ -18,18 +18,21 @@ Ensure you have Node.js installed on your system. You can download and install i
 ## Access the project directory:
 
 2. **Once the project is created, navigate to the project directory:**:
+   
    ```
     cd project-name
    ``` 
 
 ## Install the project dependencies using npm:
 3. **Install the necessary dependencies using npm:**
+   
    ```
    npm install
    ``` 
 ## Start the Project:
 
 4. **To start the project, run:**
+   
    ```
    npm run dev
    ```
