@@ -18,28 +18,28 @@ Ensure you have Node.js installed on your system. You can download and install i
 ## Access the project directory:
 
 2. **Once the project is created, navigate to the project directory:**:
-```
- cd project-name
-``` 
+   ```
+    cd project-name
+   ``` 
 
 ## Install the project dependencies using npm:
 3. **Install the necessary dependencies using npm:**
-```
-npm install
-``` 
-## Inicia el Proyecto
+   ```
+   npm install
+   ``` 
+## Start the Project:
 
 4. **To start the project, run:**
-```
-npm run dev
-```
+   ```
+   npm run dev
+   ```
 
 ## If you are working with an existing repository, clone it to your local machine:
 
 bash
-```
-git clone <REPOSITORY_URL>
-```
+   ```
+   git clone <REPOSITORY_URL>
+   ```
 
 ## Then, follow steps 2 to 4.
 
