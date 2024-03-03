@@ -13,5 +13,10 @@ body {
 .navbar {
     background-color: #00263A;
     padding: 4px;
+    
 }
 
+.active-link {
+    text-decoration: underline;
+    color:lightgray;
+}

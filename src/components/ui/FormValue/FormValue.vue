@@ -1,6 +1,6 @@
 <template>
   <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
-    <input class="w-[80%] p-4 text-md md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" placeholder="Number of refills"/>
+    <input class="w-[80%] p-4 text-sm md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" />
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
       <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
@@ -204,12 +204,13 @@
               })
 
             })
-            this.resetValues()
+            
             .catch(err => {
               // Manejar el error
               this.handleError('Error copying link: ', err)
             });
           document.body.removeChild(input);
+          this.resetValues()
         } else {
           this.handleError('Error, complete the fields.')
         }
