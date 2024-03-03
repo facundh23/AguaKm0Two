@@ -8,6 +8,7 @@
                     <p class="text-[#04263A]">Plastic Saved: <span class="font-bold text-[#04263A]">{{ doc.plasticsSaved
                     }} KG</span> </p>
                     <p class="text-[#04263A]">Carbon Saved: <span class="font-bold text-[#04263A]">{{ doc.carbonSaved }}</span> </p>
+                    <p class="text-[#04263A]">Created At: <span class="font-bold text-[#04263A]">{{ doc.createdAt }}</span> </p>
                 </div>
             </li>
         </ul>
@@ -30,11 +31,7 @@ export default {
         this.documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         
     },
-    computed: {
-        sortedDocuments() {
-            return this.documents.slice().sort((a, b) => b.date.localeCompare(a.date));
-        }
-    }
+  
 };
 
-</script>../../services/firebase
+</script>

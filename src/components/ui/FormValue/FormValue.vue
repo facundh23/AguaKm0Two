@@ -49,7 +49,7 @@
 </template>
   
 <script>
-
+  import { format } from 'date-fns';
   import { db, collection, addDoc } from '../../../services/firebase';
 
   export default {
@@ -67,7 +67,7 @@
         linkGenerated: false,
         link: '',
         KG_PLASTIC_PER_BOTTLE: 0.012,
-        KG_CARBON_PER_BOTTLE: 0.08
+        KG_CARBON_PER_BOTTLE: 0.08,
       };
     },
 
@@ -97,7 +97,7 @@
       calculateSavings() {
         // Assuming 2 bottles per refill
         const numberOfRefills = parseFloat(this.numberOfRefills);
-        if (!isNaN(numberOfRefills)) {
+        if (!isNaN(numberOfRefills && numberOfRefills > 0)) {
           const calculatedBottles = numberOfRefills * 2;
           const calculatedPlastics = (calculatedBottles * this.KG_PLASTIC_PER_BOTTLE).toFixed(2);
           const calculatedCarbon = (calculatedBottles * this.  KG_CARBON_PER_BOTTLE).toFixed(2);
@@ -115,10 +115,13 @@
       },
       saveResults() {
         if (this.resultCalculated) {
+          const currentDate = new Date();
+          const formatedDate = format(currentDate, 'dd/MM/yyyy')
           addDoc(collection(db, "savings"), {
             bottlesSaved: this.animatedBottles,
             plasticsSaved: parseFloat(this.animatedPlastics),
             carbonSaved: parseFloat(this.animatedCarbon),
+            createdAt: formatedDate
           })
             .then(docRef => {
               this.refills = 0;
