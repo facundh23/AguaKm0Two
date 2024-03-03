@@ -1,6 +1,6 @@
 <template>
   <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
-    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold border-2 border-b-black" v-model="refills" placeholder="Please indicate the number of bottles you refilled"/>
+    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold border-2" v-model="refills" placeholder="Please indicate the number of bottles you refilled"/>
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
       <button class="bg-[#C7A0CE] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
@@ -10,15 +10,17 @@
         <div class="flex items-center w-[100%] justify-center gap-2 ">
           <p>Bottles</p>
           <i class="fa-solid fa-arrow-right"></i>
-          <p>{{ parseFloat(bottlesSaved) }}</p>
+          <p>{{ animatedBottles }}</p>
         </div>
         <div class="flex items-center w-[100%] justify-center gap-2 ">
           <p>Kg Plastic</p>
-          <i class="fa-solid fa-arrow-right"></i><p>{{ parseFloat(plasticsSaved) }}</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <p>{{ animatedPlastics }}</p>
         </div>
         <div class="flex items-center w-[100%] justify-center gap-2">
           <p>Kg Carbon</p>
-          <i class="fa-solid fa-arrow-right animate-fade animate-infinite animate-duration-1000 animate-delay-0 animate-ease-in animate-normal animate-fill-forwards "></i><p>{{ parseFloat(carbonSaved) }}</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <p>{{ animatedCarbon }}</p>
         </div>
       </div>
       
@@ -35,8 +37,8 @@
       </button>
       <div v-if="linkGenerated"
         class="btn-save p-2 w-[80%] rounded-lg font-bold flex flex-col items-center justify-around gap-2">
-        <label class="text-2xl text-white">Impact link:</label>
-        <input class=" bg-[#26D07C]p-2 rounded-lg w-[79%] text-black text-center" ref="enlaceInput" type="text" v-model="link"
+        <label class="text-2xl text-[#04263A]">Impact link:</label>
+        <input class=" bg-[#26D07C]p-2 rounded-lg w-[79%] text-black text-center bg-[#26D07C] p-2 w-full" ref="enlaceInput" type="text" v-model="link"
           readonly>
       </div>
       <button class="bg-[#26D07C] w-[79%] p-2 rounded-lg font-bold  md:w-[80%]  shadow-lg shadow-black text-[#04263A]" @click="saveResults">Save</button>
@@ -50,39 +52,54 @@
 
 
 import { db, collection, addDoc } from '../../../services/firebase';
-
+import CountUp from 'vue-countup-v3'
 export default {
-
+  components: {
+    CountUp,
+  },
   name: 'InputValue',
 
   data() {
+
     return {
       reloads: 0,
       resultCalculated: false,
       bottlesSaved: 0,
       plasticsSaved: 0,
       carbonSaved: 0,
+      animatedBottles:0,
+      animatedPlastics:0,
+      animatedCarbon:0,
       linkGenerated: false,
       link: ''
     };
   },
-
-
-
   methods: {
+    animateValue(ref, start, end, duration, decimalPlaces = 2) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      this[ref] = (progress * (end - start) + start).toFixed(decimalPlaces);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  
+  },
     calculateSavings() {
-
       // Assuming 2 bottles per refill
       const refills = parseFloat(this.refills);
       if (!isNaN(refills)) {
+        const calculatedBottles = refills * 2;
+        const calculatedPlastics = (calculatedBottles * 0.012).toFixed(2);
+        const calculatedCarbon = (calculatedBottles * 0.08).toFixed(2);
 
-        this.bottlesSaved = this.refills * 2;
 
-        // Approximating 0.012 kg of plastic per bottle
-        this.plasticsSaved = (this.bottlesSaved * 0.012).toFixed(2);
-
-        // Approximation of 0.08 kg of CO2 per bottle
-        this.carbonSaved = (this.bottlesSaved * 0.08).toFixed(2);
+        this.animateValue('animatedBottles', 0 , calculatedBottles, 8000 );
+        this.animateValue('animatedPlastics', 0 , calculatedPlastics, 8000 );
+        this.animateValue('animatedCarbon', 0 , calculatedCarbon, 8000 );
       } else {
         this.$swal({
           title: 'Error!',
@@ -98,9 +115,9 @@ export default {
     saveResults() {
       if (this.resultCalculated) {
         addDoc(collection(db, "savings"), {
-          bottlesSaved: this.bottlesSaved,
-          plasticsSaved: parseFloat(this.plasticsSaved),
-          carbonSaved: parseFloat(this.carbonSaved),
+          bottlesSaved: this.animatedBottles,
+          plasticsSaved: parseFloat(this.animatedPlastics),
+          carbonSaved: parseFloat(this.animatedCarbon),
         })
           .then(docRef => {
             this.refills = 0;
@@ -134,9 +151,9 @@ export default {
       if (this.resultCalculated) {
         const baseUrl = import.meta.env.VITE_APP_BASE_URL; // Cambia esto por tu URL de producción
         const queryParams = new URLSearchParams({
-          bottlesSaved: this.bottlesSaved,
-          plasticsSaved: this.plasticsSaved,
-          carbonSaved: this.carbonSaved
+          bottlesSaved: this.animatedBottles,
+          plasticsSaved: this.animatedPlastics,
+          carbonSaved: this.animatedCarbon
         });
         this.link = `${baseUrl}?${queryParams.toString()}`;
         this.linkGenerated = true;
@@ -183,17 +200,12 @@ export default {
         })
       }
     }
-
+  },
+  mounted(){
+    this.animateValue('an')
   }
 };
 
 
 </script>
 
-<style>
-
-  .btn-generator:hover{
-    cursor: pointer;
-  }
-
-</style>

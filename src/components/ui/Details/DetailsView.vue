@@ -28,7 +28,7 @@ export default {
     async mounted() {
         const querySnapshot = await getDocs(collection(db, "savings"));
         this.documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log(this.documents.map())
+        
     },
 };
 
