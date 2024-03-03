@@ -107,6 +107,18 @@
       });
       },
 
+      resetValues(){
+
+        this.numberOfRefills = 0;
+        this.animatedBottles = 0;
+        this.animatedPlastics = 0;
+        this.animatedCarbon = 0;
+        this.resultCalculated = false;
+        this.linkGenerated = false;
+        this.link = '';
+
+        localStorage.removeItem("numberOfRefills")
+      },
       
 
       
@@ -127,7 +139,7 @@
         }
 
         this.resultCalculated = true;
-
+       
       },
       saveResults() {
         if (this.resultCalculated) {
@@ -148,9 +160,9 @@
                 confirmButtonText: 'Cool'
               })
             })
+            this.resetValues()
             .catch(error => {
               this.handleError(`Error saving results to Firebase:, ${error}`);
-
             });
         } else {
           this.handleError('Error, complete the fields');
@@ -170,6 +182,7 @@
 
           // Navegar a la página de detalles
           this.$router.push({name:SharedLink, query:queryParams})
+          this.resetValues()
         } else {
           this.handleError('Error, complete the fields')
         }
@@ -191,6 +204,7 @@
               })
 
             })
+            this.resetValues()
             .catch(err => {
               // Manejar el error
               this.handleError('Error copying link: ', err)
