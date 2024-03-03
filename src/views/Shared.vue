@@ -1,6 +1,6 @@
 
 <template>
-    <div class="box-color ">
+    <div class="flex items-center justify-center h-[94vh] m-0 p-0 ">
         <SharedLink />
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
-    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" placeholder="Please indicate the number of bottles you refilled"/>
+    <input class="w-[80%] p-4 text-md md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" placeholder="Number of refills"/>
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
       <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
@@ -57,6 +57,7 @@
     name: 'InputValue',
     data() {
       return {
+        numberOfRefills: 0,
         resultCalculated: false,
         bottlesSaved: 0,
         plasticsSaved: 0,
@@ -70,6 +71,17 @@
         KG_CARBON_PER_BOTTLE: 0.08,
       };
     },
+      watch: {
+        numberOfRefills(newVal){
+          localStorage.setItem('numberOfRefills', JSON.stringify(newVal))
+        }
+      },
+      mounted(){
+        const savedRefills = localStorage.getItem('numberOfRefills');
+        if(savedRefills !== null){
+          this.numberOfRefills = JSON.parse(savedRefills)
+        }
+      },
 
     methods: {
       animateValue(ref, start, end, duration, decimalPlaces = 2) {
@@ -92,8 +104,12 @@
         text: errorMessage,
         icon: 'error',
         confirmButtonText: 'Close'
-    });
+      });
       },
+
+      
+
+      
       calculateSavings() {
         // Assuming 2 bottles per refill
         const numberOfRefills = parseFloat(this.numberOfRefills);

@@ -16,6 +16,7 @@
 </template>
   
 <script>
+
 import { db } from '../../services/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
