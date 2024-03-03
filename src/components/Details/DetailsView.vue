@@ -15,7 +15,7 @@
 </template>
   
 <script>
-import { db } from '../../../services/firebase';
+import { db } from '../../services/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
 export default {
@@ -30,13 +30,11 @@ export default {
         this.documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         
     },
+    computed: {
+        sortedDocuments() {
+            return this.documents.slice().sort((a, b) => b.date.localeCompare(a.date));
+        }
+    }
 };
 
-</script>
-<style>
-    .detailBoxColor {
-        background-color:#00263A;
-        
-    }
-
-</style>
+</script>../../services/firebase

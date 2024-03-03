@@ -12,8 +12,8 @@ export default {
     components: { DetailsView }
 }
 
-import DetailsView from '../components/ui/Details/DetailsView.vue';
+import DetailsView from '../components/Details/DetailsView.vue';
 
 
 </script>
-
+../components/Details/DetailsView.vue

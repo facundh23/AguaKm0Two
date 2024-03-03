@@ -1,6 +1,6 @@
 <template>
   <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
-    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold border-2" v-model="refills" placeholder="Please indicate the number of bottles you refilled"/>
+    <input class="w-[80%] p-4  rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" placeholder="Please indicate the number of bottles you refilled"/>
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
       <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
@@ -57,7 +57,6 @@
     name: 'InputValue',
     data() {
       return {
-        reloads: 0,
         resultCalculated: false,
         bottlesSaved: 0,
         plasticsSaved: 0,
@@ -66,7 +65,9 @@
         animatedPlastics:0,
         animatedCarbon:0,
         linkGenerated: false,
-        link: ''
+        link: '',
+        KG_PLASTIC_PER_BOTTLE: 0.012,
+        KG_CARBON_PER_BOTTLE: 0.08
       };
     },
 
@@ -84,25 +85,29 @@
       window.requestAnimationFrame(step);
     
     },
+
+      handleError(errorMessage){
+        this.$swal({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'Close'
+    });
+      },
       calculateSavings() {
         // Assuming 2 bottles per refill
-        const refills = parseFloat(this.refills);
-        if (!isNaN(refills)) {
-          const calculatedBottles = refills * 2;
-          const calculatedPlastics = (calculatedBottles * 0.012).toFixed(2);
-          const calculatedCarbon = (calculatedBottles * 0.08).toFixed(2);
+        const numberOfRefills = parseFloat(this.numberOfRefills);
+        if (!isNaN(numberOfRefills)) {
+          const calculatedBottles = numberOfRefills * 2;
+          const calculatedPlastics = (calculatedBottles * this.KG_PLASTIC_PER_BOTTLE).toFixed(2);
+          const calculatedCarbon = (calculatedBottles * this.  KG_CARBON_PER_BOTTLE).toFixed(2);
 
 
           this.animateValue('animatedBottles', 0 , calculatedBottles, 1000 );
           this.animateValue('animatedPlastics', 0 , calculatedPlastics, 1000 );
           this.animateValue('animatedCarbon', 0 , calculatedCarbon, 1000 );
         } else {
-          this.$swal({
-            title: 'Error!',
-            text: 'Error, complete the fields',
-            icon: 'error',
-            confirmButtonText: 'Close'
-          })
+          this.handleError('Calculated values must be greater than zero')
         }
 
         this.resultCalculated = true;
@@ -125,21 +130,11 @@
               })
             })
             .catch(error => {
-              this.$swal({
-                title: 'Error!',
-                text: `Error saving results to Firebase:, ${error}`,
-                icon: 'error',
-                confirmButtonText: 'Close'
-              })
+              this.handleError(`Error saving results to Firebase:, ${error}`);
 
             });
         } else {
-          this.$swal({
-            title: 'Error!',
-            text: 'Error, complete the fields',
-            icon: 'error',
-            confirmButtonText: 'Try Again'
-          })
+          this.handleError('Error, complete the fields');
         }
 
       },
@@ -157,12 +152,7 @@
           // Navegar a la página de detalles
           this.$router.push({name:SharedLink, query:queryParams})
         } else {
-          this.$swal({
-            title: 'Error!',
-            text: 'Error, complete the fields',
-            icon: 'error',
-            confirmButtonText: 'Try Again'
-          })
+          this.handleError('Error, complete the fields')
         }
       },
 
@@ -184,16 +174,11 @@
             })
             .catch(err => {
               // Manejar el error
-              console.error('Error copying link: ', err);
+              this.handleError('Error copying link: ', err)
             });
           document.body.removeChild(input);
         } else {
-          this.$swal({
-            title: 'Error!',
-            text: 'Error, complete the fields.',
-            icon: 'error',
-            confirmButtonText: 'Try Again'
-          })
+          this.handleError('Error, complete the fields.')
         }
       }
     },
