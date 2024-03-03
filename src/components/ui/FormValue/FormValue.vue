@@ -56,7 +56,6 @@
 
     name: 'InputValue',
     data() {
-
       return {
         reloads: 0,
         resultCalculated: false,
@@ -70,6 +69,7 @@
         link: ''
       };
     },
+
     methods: {
       animateValue(ref, start, end, duration, decimalPlaces = 2) {
       let startTimestamp = null;
