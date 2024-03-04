@@ -225,6 +225,7 @@
               })
 
             })
+            this.resetValues()
             .catch(err => {
               // Manejar el error
               this.handleError('Error copying link: ', err)
