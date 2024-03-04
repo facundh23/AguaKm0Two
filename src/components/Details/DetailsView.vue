@@ -3,6 +3,7 @@
         <ul class="flex items-center flex-col justify-center w-[100%] ">
             <li class="mt-2 border-4 border-[#04263A] p-2 w-[70%] md:w-[50%] bg-[#E6FBED]" v-for="doc in documents" :key="doc.id">
                 <div class="flex flex-col text-center justify-center mx-auto ">
+                    <!-- Showing the details of each document -->
                    <p class="text-[#04263A] ">ID: <span class=" text-sm md:text-base text-[#04263A] font-bold">{{ doc.id }}</span></p>
                     <p class="text-[#04263A]">Bottles Saved: <span class="font-bold text-[#04263A]">{{ doc.bottlesSaved }}</span> </p>
                     <p class="text-[#04263A]">Plastic Saved: <span class="font-bold text-[#04263A]">{{ doc.plasticsSaved
@@ -27,7 +28,9 @@ export default {
             documents: [],
         };
     },
+
     async mounted() {
+        // Lifecycle hook that is called after the component is assembled.
         const querySnapshot = await getDocs(collection(db, "savings"));
         this.documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         

@@ -1,6 +1,15 @@
+/*
+ * InputValue component
+ * 
+ * This component allows users to input the number of bottle refills,
+ * calculate and display the savings in bottles, plastic and carbon, and generate a link with this data for sharing.
+ * with this data for sharing. It also allows to save the results in Firebase.
+ */
 <template>
   <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
-    <input class="w-[80%] p-4 text-sm md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" v-model="numberOfRefills" />
+    <!-- Button to calculate savings based on the number of refills-->
+    <label for="calculate" class="text-xl md:text-2xl font-bold text-[#26D07C]">Number of refills</label>
+    <input class="w-[80%] p-4 text-sm md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" id="calculate" v-model="numberOfRefills" />
     <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
       <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
@@ -42,7 +51,7 @@
           readonly>
       </div>
       <button class="bg-[#C7A0CE] w-[79%] p-2 rounded-lg font-bold  md:w-[80%]  shadow-lg shadow-black text-[#04263A]" @click="saveResults">Save</button>
-      <!-- División para mostrar el enlace generado -->
+      
     </div>
 
   </div>
@@ -57,26 +66,31 @@
     name: 'InputValue',
     data() {
       return {
-        numberOfRefills: 0,
-        resultCalculated: false,
-        bottlesSaved: 0,
-        plasticsSaved: 0,
-        carbonSaved: 0,
-        animatedBottles:0,
-        animatedPlastics:0,
-        animatedCarbon:0,
-        linkGenerated: false,
-        link: '',
-        KG_PLASTIC_PER_BOTTLE: 0.012,
-        KG_CARBON_PER_BOTTLE: 0.08,
+        numberOfRefills: 0, // Number of recharges made by the user
+        resultCalculated: false, // Boolean to check if the bottle refill calculation was performed.
+        bottlesSaved: 0, // Stores number of saved bottles
+        plasticsSaved: 0, // Stores weight of plastic saved (in kg)
+        carbonSaved: 0, // Number of KG of carbon saved
+        animatedBottles:0, // Stores the animated number of saved bottles
+        animatedPlastics:0, // Stores the animated weight of plastic saved (in kg)
+        animatedCarbon:0, // Stores the animated weight of carbon saved (in kg)
+        linkGenerated: false, // Flag to indicate if a link has been generated
+        link: '', // Stores the generated link to share the results
+        KG_PLASTIC_PER_BOTTLE: 0.012, // Constant representing the weight of plastic saved per bottle (in kg)
+        KG_CARBON_PER_BOTTLE: 0.08, // Constant representing the weight of carbon saved per bottle (in kg)
       };
     },
       watch: {
+        /**
+          * Notes changes to numberOfRefills and saves them to localStorage.
+          * @param {number} newVal - The new value of numberOfRefills.
+        */
         numberOfRefills(newVal){
           localStorage.setItem('numberOfRefills', JSON.stringify(newVal))
         }
       },
       mounted(){
+        // Retrieves the number of saved reloads from localStorage when starting the component.
         const savedRefills = localStorage.getItem('numberOfRefills');
         if(savedRefills !== null){
           this.numberOfRefills = JSON.parse(savedRefills)
@@ -85,6 +99,14 @@
 
     methods: {
       animateValue(ref, start, end, duration, decimalPlaces = 2) {
+        /**
+          * Animates the numeric value of a property from an initial value to a final value.
+          * @param {string} ref - The data property to animate.
+          * @param {number} start - Initial value of the animation.
+          * @param {number} end - The end value of the animation.
+          * @param {number} duration - Animation duration in milliseconds.
+          * @param {number} [decimalPlaces=2] - Number of decimal places to display.
+        */
       let startTimestamp = null;
       const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;

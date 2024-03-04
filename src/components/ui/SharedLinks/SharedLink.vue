@@ -17,6 +17,11 @@
     };
   },
   created() {
+    /**
+     * This lifecycle is executed after the Vue instance has been created.
+     *  Here, values are assigned to bottlesSaved, plasticsSaved, and carbonSaved based on the URL parameters (accessed through this.$route.query).
+     */
+    
     this.bottlesSaved = this.$route.query.bottlesSaved;
     this.plasticsSaved = this.$route.query.plasticsSaved;
     this.carbonSaved = this.$route.query.carbonSaved;
