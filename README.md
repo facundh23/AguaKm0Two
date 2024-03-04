@@ -1,50 +1,40 @@
 # Test Agua KM 0
 
-This project develops an application that allows users to input a number of water refills and calculates the environmental impact in terms of plastic bottles saved, kilograms of plastic saved, and kilograms of carbon dioxide saved.
+# Environmental Impact of Glass Bottle Refilling
 
-## Prerequisites
+This project is a web application developed to visualize and better understand the positive environmental impact of refilling glass bottles, as opposed to using plastic bottles. The goal is to raise awareness about the importance of reducing plastic use and CO2 emissions.
 
-Ensure you have Node.js installed on your system. You can download and install it from [the official Node.js website](https://nodejs.org/).
+## Technologies Used
 
-## Project Setup
+- **Vite**: Used as a build and development tool.
+- **Vue**: JavaScript framework for building the user interface.
+- **Tailwind CSS**: Used for the application's design and styles.
+- **SweetAlert**: Implemented for interactive modals and alerts.
 
-1. **Create a New Vue Application Using Vite**:
-   If you are starting from scratch and need to create a new Vue application, you can use Vite. Run the following command in your terminal:
+## Features
 
-   ```bash
-   npm create vite@latest
-   ```
+- **Data Visualization**: Displays statistics on the savings of plastic bottles and the reduction of CO2 emissions.
+- **Interactivity**: User-friendly and interactive interface.
+- **Responsive Design**: Adaptable design for different screen sizes.
 
-## Access the project directory:
+## Installation
 
-2. **Once the project is created, navigate to the project directory:**:
-   
-   ```
-    cd project-name
-   ``` 
+To install and run this project locally, follow these steps:
 
-## Install the project dependencies using npm:
-3. **Install the necessary dependencies using npm:**
-   
-   ```
-   npm install
-   ``` 
-## Start the Project:
+```bash
+# Clone the repository
+git clone (https://github.com/facundh23/TestAguaKm0.git)
 
-4. **To start the project, run:**
-   
-   ```
-   npm run dev
-   ```
+# Navigate to the project directory
+cd [name-of-the-project]
 
-## If you are working with an existing repository, clone it to your local machine:
+# Install dependencies
+npm install
 
-bash
-      ```
-      git clone <REPOSITORY_URL>
-      ```
+# Run the application in development mode
+npm run dev
 
-## Then, follow steps 2 to 4.
 
-Proyecto: [Project Agua KM0](https://test-agua-km0.vercel.app/). 
-
+```
+# Live Demo
+ [https://test-agua-km0.vercel.app/]
