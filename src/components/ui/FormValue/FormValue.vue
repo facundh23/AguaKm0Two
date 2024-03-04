@@ -141,9 +141,7 @@
 
         localStorage.removeItem("numberOfRefills")
       },
-      
-
-      
+    
       calculateSavings() {
         // Assuming 2 bottles per refill
         const numberOfRefills = parseFloat(this.numberOfRefills);
@@ -163,6 +161,7 @@
         this.resultCalculated = true;
        
       },
+
       saveResults() {
         if (this.resultCalculated) {
           const currentDate = new Date();
@@ -191,6 +190,7 @@
         }
 
       },
+
       generateLink() {
         if (this.resultCalculated) {
           const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
@@ -204,7 +204,6 @@
 
           // Navegar a la página de detalles
           this.$router.push({name:SharedLink, query:queryParams})
-          this.resetValues()
         } else {
           this.handleError('Error, complete the fields')
         }
@@ -226,13 +225,11 @@
               })
 
             })
-            
             .catch(err => {
               // Manejar el error
               this.handleError('Error copying link: ', err)
             });
           document.body.removeChild(input);
-          this.resetValues()
         } else {
           this.handleError('Error, complete the fields.')
         }
