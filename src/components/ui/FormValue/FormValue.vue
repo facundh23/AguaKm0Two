@@ -1,60 +1,48 @@
-/*
- * InputValue component
- * 
- * This component allows users to input the number of bottle refills,
- * calculate and display the savings in bottles, plastic and carbon, and generate a link with this data for sharing.
- * with this data for sharing. It also allows to save the results in Firebase.
- */
+
+ <!-- InputValue component
+ 
+ This component allows users to input the number of bottle refills,
+ calculate and display the savings in bottles, plastic and carbon, and generate a link with this data for sharing.
+ with this data for sharing. It also allows to save the results in Firebase. -->
+ 
 <template>
-  <div class="w-[80%] flex items-center justify-center gap-4 p-6 flex-col border-4 border-[#04263A] rounded-lg shadow-2xl shadow-black">
+  <div class="">
     <!-- Button to calculate savings based on the number of refills-->
-    <label for="calculate" class="text-xl md:text-2xl font-bold text-[#26D07C]">Number of refills</label>
-    <input class="w-[80%] p-4 text-sm md:text-base rounded-lg md:w-[80%] text-center font-bold border-2" id="calculate" v-model="numberOfRefills" />
-    <div class="flex items-center justify-center w-full  gap-2 md:flex-row">
-      <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[80%] md:w-[80%] text-[#04263A] shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
+    
+    <div class="flex flex-col md:flex-col items-center justify-center w-full p-4 gap-2 md:h-[30vh] ">
+      <input class="w-[100%] p-4 text-sm md:text-base rounded-lg md:w-[50%] text-center font-bold border-2" id="calculate" v-model="numberOfRefills" />
+      <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[100%] md:w-[40%] text-[#04263A] md:text-2xl shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
-    <div class="flex gap-4 flex-col w-[80%]">
-      <div class=" p-4 bg-[#04263A] text-[#26D07C] border-4 border-[#04263A] rounded-lg flex flex-col justify-center items-center font-bold ">
-        <h3 class="bold">Results</h3>
-        <div class="flex items-center w-[100%] justify-center gap-2 ">
+    <div class="grid grid-cols-1 gap-2 justify-center items-center sm:grid-cols-3 md:grid md:grid-cols-3 md:gap-4 p-2">
+        <div class="h-30 flex  items-center flex-col w-[100%] justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
           <p>Bottles</p>
-          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedBottles }}</p>
         </div>
-        <div class="flex items-center w-[100%] justify-center gap-2 ">
+
+        <div class=" h-30 flex items-center flex-col w-[100%] justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
           <p>Kg Plastic</p>
-          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedPlastics }}</p>
         </div>
-        <div class="flex items-center w-[100%] justify-center gap-2">
+
+        <div class="h-30 flex items-center flex-col  justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
           <p>Kg Carbon</p>
-          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedCarbon }}</p>
         </div>
       </div>
       
-    </div>
-    <div class="flex items-center justify-center gap-4 flex-col w-full">
-      <!-- Botón para generar el enlace -->
-      <button class="bg-[#C7A0CE] p-2 rounded-lg font-bold shadow-black hover:cursor-pointer w-[79%] shadow-lg md:w-[80%] text-[#04263A]" v-if="!linkGenerated" @click="generateLink">
-        Generate Link
-      </button>
-      
-      <!-- Botón para copiar el enlace -->
-      <button class="bg-[#C7A0CE] p-2 w-[80%] rounded-lg font-bold text-[#04263A] shadow-lg shadow-black" v-else @click="copyLink">
-        Copy Link
-      </button>
-      <div v-if="linkGenerated"
-        class="btn-save p-2 w-[80%] rounded-lg font-bold flex flex-col items-center justify-around gap-2">
-        <label class="text-2xl text-[#04263A]">Impact link:</label>
-        <input class=" bg-[#26D07C] p-2 rounded-lg  text-black text-center w-full" ref="enlaceInput" type="text" v-model="link"
-          readonly>
+      <div class="flex items-center justify-center gap-4 flex-col w-full">
+        <!-- Botón para generar el enlace -->
+        <button class="bg-[#C7A0CE] p-2 rounded-lg font-bold shadow-black hover:cursor-pointer w-[100%] shadow-lg md:w-[40%] text-[#04263A] md:text-2xl" v-if="!linkGenerated" @click="generateLink">
+          Share Link 
+        </button>
+        
       </div>
-      <button class="bg-[#C7A0CE] w-[79%] p-2 rounded-lg font-bold  md:w-[80%]  shadow-lg shadow-black text-[#04263A]" @click="saveResults">Save</button>
-      
     </div>
 
-  </div>
+ 
 </template>
   
 <script>

@@ -16,4 +16,4 @@ import DetailsView from '../components/Details/DetailsView.vue';
 
 
 </script>
-../components/Details/DetailsView.vue
+
