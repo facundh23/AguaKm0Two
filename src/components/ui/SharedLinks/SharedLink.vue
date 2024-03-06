@@ -57,10 +57,6 @@ import { db } from '../../../services/firebase';
       this.loading = false;
     }
 
-    // this.id = this.$route.params.id
-    // this.bottlesSaved = this.$route.query.bottlesSaved;
-    // this.plasticsSaved = this.$route.query.plasticsSaved;
-    // this.carbonSaved = this.$route.query.carbonSaved;
   }
   };
   </script>
