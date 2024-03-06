@@ -169,8 +169,8 @@
             const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
             this.link = `${baseUrl}/saved/${docRef.id}`;
             this.linkGenerated = true;
-            const linkHtml = `<a href="${this.link}" target="_blank">Click here to view</a>`
-            this.handleSuccess(`Link created successfully! ${linkHtml}`)
+            
+            this.handleSuccess(`Link created successfully! ${this.link}`)
             this.resetValues();
           } catch (error) {
             this.handleError('Error, complete the fields')
