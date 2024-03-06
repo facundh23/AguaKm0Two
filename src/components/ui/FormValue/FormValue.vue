@@ -135,13 +135,13 @@
         localStorage.removeItem("numberOfRefills")
       },
       async copyToClipboard(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      this.handleSuccess('Link copied to clipboard!');
-    } catch (err) {
-      this.handleError('Failed to copy the link.');
-    }
-  },
+        try {
+          await navigator.clipboard.writeText(text);
+          this.handleSuccess('Link copied to clipboard!');
+        } catch (err) {
+          this.handleError('Failed to copy the link.');
+        }
+      },
     
       calculateSavings() {
         // Assuming 2 bottles per refill
