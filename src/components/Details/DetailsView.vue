@@ -52,7 +52,7 @@ export default {
           },
           getFullLink(linkId){
             const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
-            return `${baseUrl}/saved/${linkId}`
+            return `${baseUrl}saved/${linkId}`
           },
     },
     data() {

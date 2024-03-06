@@ -167,7 +167,7 @@
               createdAt: formatedDate
             });
             const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
-            this.link = `${baseUrl}/saved/${docRef.id}`;
+            this.link = `${baseUrl}saved/${docRef.id}`;
             this.linkGenerated = true;
             const linkHtml = `<a href="${this.link}" target="_blank">Click here to view</a>`
             this.handleSuccess(`Link created successfully! ${linkHtml}`)
