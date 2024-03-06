@@ -18,11 +18,7 @@ const routes = [
     path: '/saved/:id',
     name: 'Links',
     component: DetailsLink,
-    props: route => ({ // Pasar los parámetros de la URL como props
-      bottlesSaved: parseInt(route.query.bottlesSaved),
-      plasticsSaved: parseFloat(route.query.plasticsSaved),
-      carbonSaved: parseFloat(route.query.carbonSaved)
-    })
+    props: true
   },
  
 
