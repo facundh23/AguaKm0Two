@@ -147,6 +147,7 @@
           this.animateValue('animatedBottles', 0 , calculatedBottles, 1000 );
           this.animateValue('animatedPlastics', 0 , calculatedPlastics, 1000 );
           this.animateValue('animatedCarbon', 0 , calculatedCarbon, 1000 );
+          this.resetValues()
         } else {
           this.handleError('Calculated values must be greater than zero')
         }
