@@ -3,20 +3,16 @@
     
         <ul  class="flex items-center flex-col justify-center w-[100%] gap-4 p-2">
             <li  class="w-[100%] flex justify-center gap-4" v-for="link in savedLinks" :key="'link.id'">
-                <a 
-                    class="text-[#04263A] bg-[#26D07C] w-[100%] md:w-[70%] text-center p-2 rounded-lg" 
-                    :href="`${baseUrl}/saved/${link.id}`" 
-                    target="_blank">
+                <router-link to="`/saved/${link.id}`" class="text-[#04263A] bg-[#26D07C] w-[100%] md:w-[70%] text-center p-2 rounded-lg">
                     <span class="hover:cursor-pointer font-bold ml-2">{{ `${baseUrl}/saved/${link.id}` }} -   {{ link.createdAt }}</span>
-                </a>
-                    
-               
+                </router-link>
             </li>
         </ul>
     </div>
 </template>
   
 <script>
+import { RouterLink } from 'vue-router';
 import { db } from '../../services/firebase';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
