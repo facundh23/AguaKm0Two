@@ -180,7 +180,7 @@
             this.linkGenerated = true;
             
             this.handleSuccess(`Link created successfully! ${this.link}`)
-            this.resetValues();
+            
           } catch (error) {
             this.handleError('Error, complete the fields')
           }
