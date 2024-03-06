@@ -1,39 +1,68 @@
 <template>
     <div class="flex flex-col items-center justify-center bg-[#E6FBED] ">
-        <ul class="flex items-center flex-col justify-center w-[100%] ">
-            <li class="mt-2 border-4 border-[#04263A] p-2 w-[70%] md:w-[50%] bg-[#E6FBED]" v-for="doc in documents" :key="doc.id">
-                <div class="flex flex-col text-center justify-center mx-auto ">
-                    <!-- Showing the details of each document -->
-                   <p class="text-[#04263A] ">ID: <span class=" text-sm md:text-base text-[#04263A] font-bold">{{ doc.id }}</span></p>
-                    <p class="text-[#04263A]">Bottles Saved: <span class="font-bold text-[#04263A]">{{ doc.bottlesSaved }}</span> </p>
-                    <p class="text-[#04263A]">Plastic Saved: <span class="font-bold text-[#04263A]">{{ doc.plasticsSaved
-                    }} KG</span> </p>
-                    <p class="text-[#04263A]">Carbon Saved: <span class="font-bold text-[#04263A]">{{ doc.carbonSaved }}</span> </p>
-                    <p class="text-[#04263A]">Created At: <span class="font-bold text-[#04263A]">{{ doc.createdAt }}</span> </p>
-                </div>
+    
+        <ul  class="flex items-center flex-col justify-center w-[100%] gap-4 p-2">
+            <li  class="w-[100%] flex justify-center gap-4" v-for="link in savedLinks" :key="'link.id'">
+                <a 
+                    class="text-[#04263A] bg-[#26D07C] w-[100%] md:w-[70%] text-center p-2 rounded-lg" 
+                    :href="`${baseUrl}/saved/${link.id}`" 
+                    target="_blank">
+                    <span class="hover:cursor-pointer font-bold ml-2">{{ `${baseUrl}/saved/${link.id}` }} -   {{ link.createdAt }}</span>
+                </a>
+                    
+               
             </li>
         </ul>
     </div>
 </template>
   
 <script>
-
 import { db } from '../../services/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+
 
 export default {
     name: 'DetailsView',
+    computed: {
+        baseUrl() {
+            return import.meta.env.VITE_APP_BASE_URL;
+        }
+    },
+  
+    methods: {
+        handleError(errorMessage){
+            this.$swal({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'Close'
+          });
+          },
+          async fetchSavedLinks(){
+              try {
+                  const savingsCollections = collection(db, 'savings');
+                  const q = query(savingsCollections, orderBy('createdAt'))
+                  const querySnapshot = await getDocs(q);
+                  this.savedLinks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+              } catch (error) {
+                  this.handleError('Error getting documents', error)
+              } finally {
+                this.isLoading = false
+              }
+          },
+          getFullLink(linkId){
+            const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
+            return `${baseUrl}/saved/${linkId}`
+          },
+    },
     data() {
         return {
-            documents: [],
+            savedLinks: [],
+            isLoading:true
         };
     },
-
-    async mounted() {
-        // Lifecycle hook that is called after the component is assembled.
-        const querySnapshot = await getDocs(collection(db, "savings"));
-        this.documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
+    mounted() {
+        this.fetchSavedLinks();    
     },
   
 };

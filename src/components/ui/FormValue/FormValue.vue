@@ -6,48 +6,46 @@
  with this data for sharing. It also allows to save the results in Firebase. -->
  
 <template>
-  <div class="">
+  <div class="flex flex-col h-[90vh] justify-center sm:justify-center ">
     <!-- Button to calculate savings based on the number of refills-->
-    
     <div class="flex flex-col md:flex-col items-center justify-center w-full p-4 gap-2 md:h-[30vh] ">
-      <input class="w-[100%] p-4 text-sm md:text-base rounded-lg md:w-[50%] text-center font-bold border-2" id="calculate" v-model="numberOfRefills" />
-      <button class=" bg-[#26D07C] p-2 rounded-lg font-bold w-[100%] md:w-[40%] text-[#04263A] md:text-2xl shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
+        <input class="w-[60%] p-4 text-sm sm:w-[55%] md:text-base  md:w-[35%] text-center font-bold border-2 rounded-lg" id="calculate" v-model="numberOfRefills" />
+        <button class=" bg-[#26D07C] p-3 rounded-lg font-bold w-[55%] md:w-[20%] text-[#04263A] md:text-2xl shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
-    <div class="grid grid-cols-1 gap-2 justify-center items-center sm:grid-cols-3 md:grid md:grid-cols-3 md:gap-4 p-2">
-        <div class="h-30 flex  items-center flex-col w-[100%] justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
+
+    <div class="flex flex-col items-center gap-2 md:flex-row md:justify-around flex-wrap  md:h-[30vh]  md:gap-4 p-2 ">
+        <div class="h-32 flex w-[55%] items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
           <p>Bottles</p>
           <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedBottles }}</p>
         </div>
 
-        <div class=" h-30 flex items-center flex-col w-[100%] justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
+        <div class=" h-32 w-[55%] flex items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A]   md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
           <p>Kg Plastic</p>
           <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedPlastics }}</p>
         </div>
 
-        <div class="h-30 flex items-center flex-col  justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:h-72 rounded-lg">
-          <p>Kg Carbon</p>
-          <i class="fa-solid fa-arrow-down"></i>
-          <p>{{ animatedCarbon }}</p>
+          <div class="h-32 w-[55%] flex items-center flex-col  justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
+            <p>Kg Carbon</p>
+            <i class="fa-solid fa-arrow-down"></i>
+            <p>{{ animatedCarbon }}</p>
+          </div>
+       
+          
+            <button class="bg-[#C7A0CE] w-[55%] p-3 rounded-lg font-bold shadow-black hover:cursor-pointer shadow-lg md:w-[20%] text-[#04263A] md:text-2xl" @click="generateLink">
+              Share Link 
+            </button>
+         
         </div>
-      </div>
-      
-      <div class="flex items-center justify-center gap-4 flex-col w-full">
-        <!-- Botón para generar el enlace -->
-        <button class="bg-[#C7A0CE] p-2 rounded-lg font-bold shadow-black hover:cursor-pointer w-[100%] shadow-lg md:w-[40%] text-[#04263A] md:text-2xl" v-if="!linkGenerated" @click="generateLink">
-          Share Link 
-        </button>
-        
-      </div>
-    </div>
 
- 
+  </div>
 </template>
   
 <script>
   import { format } from 'date-fns';
   import { db, collection, addDoc } from '../../../services/firebase';
+
 
   export default {
 
@@ -105,20 +103,27 @@
         }
       };
       window.requestAnimationFrame(step);
+
     
     },
-
+      handleSuccess(succesMessage){
+        this.$swal({
+        title: 'Link Saved!',
+        html: succesMessage,
+        icon: 'success',
+        confirmButtonText: 'Close'
+      });
+      },
       handleError(errorMessage){
         this.$swal({
         title: 'Error!',
-        text: errorMessage,
+        html: errorMessage,
         icon: 'error',
         confirmButtonText: 'Close'
       });
       },
 
       resetValues(){
-
         this.numberOfRefills = 0;
         this.animatedBottles = 0;
         this.animatedPlastics = 0;
@@ -145,84 +150,36 @@
         } else {
           this.handleError('Calculated values must be greater than zero')
         }
-
         this.resultCalculated = true;
-       
       },
 
-      saveResults() {
+      async generateLink() {
         if (this.resultCalculated) {
-          const currentDate = new Date();
-          const formatedDate = format(currentDate, 'dd/MM/yyyy')
-          addDoc(collection(db, "savings"), {
-            bottlesSaved: this.animatedBottles,
-            plasticsSaved: parseFloat(this.animatedPlastics),
-            carbonSaved: parseFloat(this.animatedCarbon),
-            createdAt: formatedDate
-          })
-            .then(docRef => {
-              this.refills = 0;
-              this.$swal({
-                title: 'OK!',
-                text: `Results saved in Firebase with ID:, ${docRef.id}`,
-                icon: 'success',
-                confirmButtonText: 'Cool'
-              })
-            })
-            this.resetValues()
-            .catch(error => {
-              this.handleError(`Error saving results to Firebase:, ${error}`);
+          try {
+            
+            const currentDate = new Date();
+            const formatedDate = format(currentDate, 'dd/MM/yyyy HH:mm:ss');
+            const docRef = await addDoc(collection(db,'savings'), {
+              bottlesSaved: this.animatedBottles,
+              plasticsSaved: parseFloat(this.animatedPlastics),
+              carbonSaved: parseFloat(this.animatedCarbon),
+              createdAt: formatedDate
             });
-        } else {
-          this.handleError('Error, complete the fields');
-        }
-
-      },
-
-      generateLink() {
-        if (this.resultCalculated) {
-          const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
-          const queryParams = new URLSearchParams({
-            bottlesSaved: this.animatedBottles,
-            plasticsSaved: this.animatedPlastics,
-            carbonSaved: this.animatedCarbon
-          });
-          this.link = `${baseUrl}?${queryParams.toString()}`;
-          this.linkGenerated = true;
-
+            const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
+            this.link = `${baseUrl}/saved/${docRef.id}`;
+            this.linkGenerated = true;
+            const linkHtml = `<a href="${this.link}" target="_blank">Click here to view</a>`
+            this.handleSuccess(`Link created successfully! ${linkHtml}`)
+            this.resetValues();
+          } catch (error) {
+            this.handleError('Error, complete the fields')
+          }
           // Navegar a la página de detalles
-          this.$router.push({name:SharedLink, query:queryParams})
+          // this.$router.push({name:SharedLink, query:queryParams})
         } else {
           this.handleError('Error, complete the fields')
         }
       },
-
-      copyLink() {
-        if (this.linkGenerated) {
-          const input = document.createElement('input');
-          input.setAttribute('value', this.link);
-          document.body.appendChild(input);
-          input.select();
-          navigator.clipboard.writeText(this.link)
-            .then(() => {
-              this.$swal({
-                title: 'OK!',
-                text: 'Link copied to clipboard.',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-              })
-
-            })
-            this.resetValues()
-            .catch(err => {
-              // Manejar el error
-              this.handleError('Error copying link: ', err)
-            });
-          document.body.removeChild(input);
-        } else {
-          this.handleError('Error, complete the fields.')
-        }
-      }
     },
   };
 </script>

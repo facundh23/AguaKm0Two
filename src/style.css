@@ -12,8 +12,8 @@ body {
 
 .navbar {
     background-color: #00263A;
-    padding: 4px;
-    
+    padding: 10px;
+    font-size: 18px;
 }
 
 .active-link {
