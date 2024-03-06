@@ -24,12 +24,7 @@ const routes = [
       carbonSaved: parseFloat(route.query.carbonSaved)
     })
   },
-  {
-    path: '/saved',
-    name: 'SavedLink',
-    component: DetailsView,
-
-  }
+ 
 
 
 ];
