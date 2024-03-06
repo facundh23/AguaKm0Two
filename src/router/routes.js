@@ -25,7 +25,7 @@ const routes = [
     })
   },
   {
-    path: 'saved',
+    path: '/saved',
     name: 'SavedLink',
     component: DetailsView,
 
