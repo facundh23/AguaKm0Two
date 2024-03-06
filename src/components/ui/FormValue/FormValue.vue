@@ -176,11 +176,10 @@
             });
             const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
             this.link = `${baseUrl}/saved/${docRef.id}`;
-            this.copyToClipboard(this.link)
             this.linkGenerated = true;
             
             this.handleSuccess(`Link created successfully! ${this.link}`)
-            
+            this.resetValues();
           } catch (error) {
             this.handleError('Error, complete the fields')
           }
