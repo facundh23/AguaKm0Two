@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center justify-center bg-[#E6FBED] ">
     
         <ul  class="flex items-center flex-col justify-center w-[100%] gap-4 p-2">
-            <li  class="w-[100%] flex justify-center gap-4" v-for="link in savedLinks" :key="`${link.id}`">
+            <li  class="w-[100%] flex justify-center gap-4" v-for="link in savedLinks" :key="'link.id'">
                 <router-link :to="`/saved/${link.id}`" class="text-[#04263A] bg-[#26D07C] w-[100%] md:w-[70%] text-center p-2 rounded-lg">
                     <span class="hover:cursor-pointer font-bold ml-2">{{ `${baseUrl}/saved/${link.id}` }} -   {{ link.createdAt }}</span>
                 </router-link>
@@ -18,7 +18,7 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 
 export default {
-    name: 'DetailsList',
+    name: 'DetailsView',
     computed: {
         baseUrl() {
             return import.meta.env.VITE_APP_BASE_URL;
@@ -47,7 +47,8 @@ export default {
               }
           },
           getFullLink(linkId){
-            return `${this.baseUrl}/saved/${linkId}`
+            const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
+            return `${baseUrl}/saved/${linkId}`
           },
     },
     data() {
