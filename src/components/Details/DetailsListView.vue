@@ -18,7 +18,7 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 
 export default {
-    name: 'DetailsView',
+    name: 'DetailsList',
     computed: {
         baseUrl() {
             return import.meta.env.VITE_APP_BASE_URL;

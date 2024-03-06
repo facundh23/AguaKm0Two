@@ -1,7 +1,7 @@
 
 <template>
     <div class="box-color h-full">
-        <DetailsView />
+        <DetailsList />
     </div>
 </template>
 
@@ -9,10 +9,10 @@
 
 export default {
     name: 'DashboardPage',
-    components: { DetailsView }
+    components: { DetailsList }
 }
 
-import DetailsView from '../components/Details/DetailsView.vue';
+import DetailsList from '../components/Details/DetailsListView.vue';
 
 
 </script>

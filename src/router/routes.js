@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import DashBoardComponent from '../views/Dashboard.vue';
-import DetailsView from '../views/Details.vue';
-import SharedLink from '../views/Shared.vue';
+import DetailsListView from '../views/Details.vue';
+import DetailsLink from '../views/Shared.vue';
 
 const routes = [
   {
@@ -11,13 +11,13 @@ const routes = [
   },
   {
     path: '/details',
-    name: 'Details',
-    component: DetailsView
+    name: 'DetailsList',
+    component: DetailsListView
   },
   {
     path: '/saved/:id',
     name: 'Links',
-    component: SharedLink,
+    component: DetailsLink,
     props: route => ({ // Pasar los parámetros de la URL como props
       bottlesSaved: parseInt(route.query.bottlesSaved),
       plasticsSaved: parseFloat(route.query.plasticsSaved),

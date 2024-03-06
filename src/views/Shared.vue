@@ -1,7 +1,7 @@
 
 <template>
     <div class="flex items-center justify-center h-[94vh] m-0 p-0 ">
-        <SharedLink />
+        <DetailsLink />
     </div>
 </template>
 
@@ -9,10 +9,10 @@
 
 export default {
     name: 'SharedLinkPage',
-    components: { SharedLink }
+    components: { DetailsLink }
 }
 
-import SharedLink from '../components/ui/SharedLinks/SharedLink.vue';
+import DetailsLink from '../components/ui/SharedLinks/DetailsLink.vue';
 
 
 </script>

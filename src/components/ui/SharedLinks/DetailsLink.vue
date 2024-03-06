@@ -11,7 +11,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 
   export default {
-    name:'SharedLink',
+    name:'DetailsLink',
     methods: {
         handleError(errorMessage){
             this.$swal({
