@@ -23,11 +23,11 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 export default {
     name: 'DetailsView',
-    computed: {
-        baseUrl() {
-            return import.meta.env.VITE_APP_BASE_URL;
-        }
-    },
+    // computed: {
+    //     baseUrl() {
+    //         return import.meta.env.VITE_APP_BASE_URL;
+    //     }
+    // },
   
     methods: {
         handleError(errorMessage){
