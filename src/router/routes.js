@@ -10,12 +10,12 @@ const routes = [
     component: DashBoardComponent
   },
   {
-    path: 'details',
+    path: '/details',
     name: 'Details',
     component: DetailsView
   },
   {
-    path: 'saved/:id',
+    path: '/saved/:id',
     name: 'Links',
     component: SharedLink,
     props: route => ({ // Pasar los parámetros de la URL como props
