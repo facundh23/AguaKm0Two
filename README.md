@@ -23,7 +23,7 @@ To install and run this project locally, follow these steps:
 
 ```bash
 # Clone the repository
-git clone (https://github.com/facundh23/TestAguaKm0.git)
+git clone (https://github.com/facundh23/AguaKm0Two.git)
 
 # Navigate to the project directory
 cd [name-of-the-project]
