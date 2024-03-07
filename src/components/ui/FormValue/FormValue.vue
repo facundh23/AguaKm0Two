@@ -134,15 +134,7 @@
 
         localStorage.removeItem("numberOfRefills")
       },
-      async copyToClipboard(text) {
-        try {
-          await navigator.clipboard.writeText(text);
-          this.handleSuccess('Link copied to clipboard!');
-        } catch (err) {
-          this.handleError('Failed to copy the link.');
-        }
-      },
-    
+      
       calculateSavings() {
         // Assuming 2 bottles per refill
         const numberOfRefills = parseFloat(this.numberOfRefills);
@@ -179,6 +171,7 @@
             this.linkGenerated = true;
             
             this.handleSuccess(`Link created successfully! ${this.link}`)
+            
             this.resetValues();
           } catch (error) {
             this.handleError('Error, complete the fields')
