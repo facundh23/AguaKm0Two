@@ -9,31 +9,31 @@
   <div class="flex flex-col h-[90vh] justify-center sm:justify-center ">
     <!-- Button to calculate savings based on the number of refills-->
     <div class="flex flex-col md:flex-col items-center justify-center w-full p-4 gap-2 md:h-[30vh] ">
-        <input class="w-[60%] p-4 text-sm sm:w-[55%] md:text-base  md:w-[35%] text-center font-bold border-2 rounded-lg" id="calculate" v-model="numberOfRefills" />
-        <button class=" bg-[#26D07C] p-3 rounded-lg font-bold w-[55%] md:w-[20%] text-[#04263A] md:text-2xl shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
+        <input class="w-[100%] p-4 text-sm sm:w-[55%] md:text-base  md:w-[35%] text-center font-bold border-2 rounded-lg" id="calculate" v-model="numberOfRefills" />
+        <button class=" bg-[#26D07C] p-3 rounded-lg font-bold w-[100%] md:w-[30%] text-[#04263A] md:text-2xl shadow-lg shadow-black" @click="calculateSavings"> Calculate</button>
     </div>
 
     <div class="flex flex-col items-center gap-2 md:flex-row md:justify-around flex-wrap  md:h-[30vh]  md:gap-4 p-2 ">
-        <div class="h-32 flex w-[55%] items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
+        <div class="h-32 flex w-[100%] items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
           <p>Bottles</p>
           <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedBottles }}</p>
         </div>
 
-        <div class=" h-32 w-[55%] flex items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A]   md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
+        <div class=" h-32 w-[100%] flex items-center flex-col justify-center gap-2 text-[#26D07C] bg-[#04263A]   md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
           <p>Kg Plastic</p>
           <i class="fa-solid fa-arrow-down"></i>
           <p>{{ animatedPlastics }}</p>
         </div>
 
-          <div class="h-32 w-[55%] flex items-center flex-col  justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
+          <div class="h-32 w-[100%] flex items-center flex-col  justify-center gap-2 text-[#26D07C] bg-[#04263A] md:text-3xl md:w-[30%] md:h-[100%] rounded-lg">
             <p>Kg Carbon</p>
             <i class="fa-solid fa-arrow-down"></i>
             <p>{{ animatedCarbon }}</p>
           </div>
        
           
-            <button class="bg-[#C7A0CE] w-[55%] p-3 rounded-lg font-bold shadow-black hover:cursor-pointer shadow-lg md:w-[20%] text-[#04263A] md:text-2xl" @click="generateLink">
+            <button class="bg-[#C7A0CE] w-[100%] p-3 rounded-lg font-bold shadow-black hover:cursor-pointer shadow-lg md:w-[20%] text-[#04263A] md:text-2xl" @click="generateLink">
               Share Link 
             </button>
          

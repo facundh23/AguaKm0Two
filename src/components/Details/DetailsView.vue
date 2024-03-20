@@ -1,13 +1,13 @@
 <template>
-    <div class="flex flex-col items-center justify-center bg-[#E6FBED] ">
+    <div class="flex flex-col items-center justify-center bg-[#E6FBED] w-[100vw]">
     
         <ul  class="flex items-center flex-col justify-center w-[100%] gap-4 p-2">
             <li  class="w-[100%] flex justify-center gap-4" v-for="link in savedLinks" :key="'link.id'">
                 <a 
-                    class="text-[#04263A] bg-[#26D07C] w-[100%] md:w-[70%] text-center p-2 rounded-lg" 
+                    class="text-[#04263A] bg-[#26D07C] md:w-[100%] text-center p-2 rounded-lg" 
                     :href="`${baseUrl}/saved/${link.id}`" 
                     target="_blank">
-                    <span class="hover:cursor-pointer font-bold ml-2">{{ `${baseUrl}/saved/${link.id}` }} -   {{ link.createdAt }}</span>
+                    <span class=" text-xs hover:cursor-pointer font-bold ml-2">{{ `${baseUrl}/saved/${link.id}` }} -   {{ link.createdAt }}</span>
                 </a>
                     
                

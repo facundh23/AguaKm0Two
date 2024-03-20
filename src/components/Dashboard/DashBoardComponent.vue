@@ -22,4 +22,4 @@ export default {
         background-color:#00263A
     }
 
-</style>../ui/InputValue/FormValue.vue
+</style>
