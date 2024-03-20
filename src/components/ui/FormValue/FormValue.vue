@@ -134,7 +134,7 @@
 
         localStorage.removeItem("numberOfRefills")
       },
-    
+      
       calculateSavings() {
         // Assuming 2 bottles per refill
         const numberOfRefills = parseFloat(this.numberOfRefills);
@@ -147,7 +147,7 @@
           this.animateValue('animatedBottles', 0 , calculatedBottles, 1000 );
           this.animateValue('animatedPlastics', 0 , calculatedPlastics, 1000 );
           this.animateValue('animatedCarbon', 0 , calculatedCarbon, 1000 );
-          this.resetValues()
+          
         } else {
           this.handleError('Calculated values must be greater than zero')
         }
@@ -169,8 +169,9 @@
             const baseUrl = import.meta.env.VITE_APP_BASE_URL; 
             this.link = `${baseUrl}/saved/${docRef.id}`;
             this.linkGenerated = true;
-            const linkHtml = `<a href="${this.link}" target="_blank">Click here to view</a>`
-            this.handleSuccess(`Link created successfully! ${linkHtml}`)
+            
+            this.handleSuccess(`Link created successfully! ${this.link}`)
+            
             this.resetValues();
           } catch (error) {
             this.handleError('Error, complete the fields')

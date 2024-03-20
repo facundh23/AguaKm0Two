@@ -3,6 +3,7 @@ import DashBoardComponent from '../views/Dashboard.vue';
 import DetailsView from '../views/Details.vue';
 import SharedLink from '../views/Shared.vue';
 
+
 const routes = [
   {
     path: '/',
@@ -24,12 +25,7 @@ const routes = [
       carbonSaved: parseFloat(route.query.carbonSaved)
     })
   },
-  {
-    path: '/saved',
-    name: 'SavedLink',
-    component: DetailsView,
-
-  }
+ 
 
 
 ];

@@ -23,7 +23,7 @@ To install and run this project locally, follow these steps:
 
 ```bash
 # Clone the repository
-git clone (https://github.com/facundh23/TestAguaKm0.git)
+git clone (https://github.com/facundh23/AguaKm0Two.git)
 
 # Navigate to the project directory
 cd [name-of-the-project]
@@ -37,4 +37,4 @@ npm run dev
 
 ```
 # Live Demo
- [Agua Km 0 Refill Demo](https://test-agua-km0.vercel.app/)
+ [Agua Km 0 Refill Demo](https://agua-km0-two.vercel.app/)
